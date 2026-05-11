@@ -1,0 +1,12 @@
+__tests__
+node_modules
+*.log
+.env
+.env.local
+.DS_Store
+coverage
+.vitest-cache
+vitest.config.ts
+tsconfig.json
+.gitignore
+.github

@@ -1,0 +1,107 @@
+{
+  "name": "@hyperd-ai/plugin-hyperd",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "ElizaOS plugin for hyperD — on-demand DeFi intelligence (wallet risk, token security, liquidation alerts, P&L, DEX quotes) paid per-call in USDC on Base via the x402 protocol. No API key, no signup.",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "sideEffects": false,
+  "license": "MIT",
+  "author": "Thomas Potter <hi@hyperd.ai>",
+  "homepage": "https://hyperd.ai",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hyperd-ai/plugin-hyperd.git"
+  },
+  "bugs": {
+    "url": "https://github.com/hyperd-ai/plugin-hyperd/issues"
+  },
+  "exports": {
+    "./package.json": "./package.json",
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "src",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "clean": "rm -rf dist",
+    "prepublishOnly": "npm run clean && npm run typecheck && npm run test && npm run build"
+  },
+  "dependencies": {
+    "@x402/fetch": "^2.11.0",
+    "@x402/evm": "^2.11.0"
+  },
+  "peerDependencies": {
+    "@elizaos/core": ">=1.7.0",
+    "viem": "^2.21.0"
+  },
+  "devDependencies": {
+    "@elizaos/core": "^1.7.2",
+    "@types/node": "^22.10.0",
+    "typescript": "^5.6.3",
+    "viem": "^2.39.3",
+    "vitest": "^2.1.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "elizaos": {
+    "plugin": {
+      "displayName": "hyperD",
+      "category": "data",
+      "capabilities": ["defi-data", "wallet-risk", "x402-buyer"]
+    }
+  },
+  "packageType": "plugin",
+  "agentConfig": {
+    "pluginType": "elizaos:plugin:1.0.0",
+    "pluginParameters": {
+      "HYPERD_API_BASE": {
+        "type": "string",
+        "required": false,
+        "default": "https://api.hyperd.ai",
+        "description": "Base URL for the hyperD API. Defaults to production."
+      },
+      "HYPERD_BUYER_PRIVATE_KEY": {
+        "type": "string",
+        "required": true,
+        "sensitive": true,
+        "description": "EVM private key (0x-prefixed, 32-byte hex) holding USDC on Base for x402 micropayments. The plugin signs EIP-3009 transfer authorizations with this key. Costs are typically $0.005–$0.20 per call."
+      },
+      "HYPERD_MAX_USDC_PER_CALL": {
+        "type": "number",
+        "required": false,
+        "default": 0.25,
+        "description": "Hard cap on USDC payment authorized per call. Refuses calls priced above this. Default $0.25."
+      }
+    }
+  },
+  "keywords": [
+    "elizaos",
+    "elizaos-plugin",
+    "plugin",
+    "hyperd",
+    "defi",
+    "x402",
+    "x402-buyer",
+    "wallet-risk",
+    "token-security",
+    "liquidation",
+    "pnl",
+    "dex-quote",
+    "usdc",
+    "base"
+  ]
+}
