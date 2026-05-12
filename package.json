@@ -1,6 +1,6 @@
 {
   "name": "@hyperd-ai/plugin-hyperd",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "type": "module",
   "description": "ElizaOS plugin for hyperD — on-demand DeFi intelligence (wallet risk, token security, liquidation alerts, P&L, DEX quotes) paid per-call in USDC on Base via the x402 protocol. No API key, no signup.",
   "main": "dist/index.js",
