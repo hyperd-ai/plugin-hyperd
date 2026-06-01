@@ -1,7 +1,7 @@
 /**
  * Action: hyperd.yield.allocation (synthesis tier)
  *
- * Calls GET /api/synthesis/yield/allocation — fans out to three yield
+ * Calls GET /api/yield/allocation — fans out to three yield
  * recommendations (low / medium / high risk) simultaneously, then passes all
  * results through claude-haiku-4-5 to produce an optimal allocation plan for
  * the specified USDC amount.
@@ -94,7 +94,7 @@ export const yieldAllocationAction: Action = {
     }
 
     try {
-      const res = await client.get<VerdictEnvelope>("/api/synthesis/yield/allocation", { amount, chain });
+      const res = await client.get<VerdictEnvelope>("/api/yield/allocation", { amount, chain });
       const v = res.verdict;
       const lines = [
         `Yield allocation plan for ${fmtUsd(amount)} on ${chain}:`,

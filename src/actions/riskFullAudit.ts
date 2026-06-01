@@ -1,7 +1,7 @@
 /**
  * Action: hyperd.risk.full_audit (synthesis tier)
  *
- * Calls GET /api/synthesis/risk/full-audit — a composed endpoint that fans out
+ * Calls GET /api/risk/full_audit — a composed endpoint that fans out
  * to balance, wallet risk, persona, contract audit, and mixer-adjacency, then
  * passes all results through claude-haiku-4-5 to produce a single verdict.
  * Cost: $0.35 in USDC on Base.
@@ -67,7 +67,7 @@ export const riskFullAuditAction: Action = {
     }
 
     try {
-      const res = await client.get<VerdictEnvelope>("/api/synthesis/risk/full-audit", { address });
+      const res = await client.get<VerdictEnvelope>("/api/risk/full_audit", { address });
       const v = res.verdict;
       const lines = [
         `Full risk audit for ${address}:`,

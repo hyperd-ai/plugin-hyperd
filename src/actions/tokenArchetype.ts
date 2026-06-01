@@ -1,7 +1,7 @@
 /**
  * Action: hyperd.token.archetype (synthesis tier)
  *
- * Calls GET /api/synthesis/token/archetype — a composed endpoint that fans out
+ * Calls GET /api/token/archetype — a composed endpoint that fans out
  * to token info, token security, and protocol TVL, then passes all results
  * through claude-haiku-4-5 to classify the token into an archetype (e.g.
  * "blue-chip", "DeFi utility", "meme", "rug risk", "governance token").
@@ -80,7 +80,7 @@ export const tokenArchetypeAction: Action = {
     }
 
     try {
-      const res = await client.get<VerdictEnvelope>("/api/synthesis/token/archetype", { contract, chain });
+      const res = await client.get<VerdictEnvelope>("/api/token/archetype", { contract, chain });
       const v = res.verdict;
       const lines = [
         `Token archetype for ${contract} on ${chain}:`,

@@ -1,7 +1,7 @@
 /**
  * Action: hyperd.wallet.thesis (synthesis tier)
  *
- * Calls GET /api/synthesis/wallet/thesis — a composed endpoint that fans out
+ * Calls GET /api/wallet/thesis — a composed endpoint that fans out
  * to balance, wallet persona, wallet P&L, and wallet anomaly, then passes
  * all results through claude-haiku-4-5 to produce a one-paragraph investment
  * thesis or behavioural summary of the wallet.
@@ -80,7 +80,7 @@ export const walletThesisAction: Action = {
     }
 
     try {
-      const res = await client.get<VerdictEnvelope>("/api/synthesis/wallet/thesis", { address, chain });
+      const res = await client.get<VerdictEnvelope>("/api/wallet/thesis", { address, chain });
       const v = res.verdict;
       const lines = [
         `Wallet thesis for ${address} on ${chain}:`,

@@ -1,7 +1,7 @@
 /**
  * Action: hyperd.wallet.threat_brief (synthesis tier)
  *
- * Calls GET /api/synthesis/wallet/threat-brief — a composed endpoint that fans
+ * Calls GET /api/wallet/threat_brief — a composed endpoint that fans
  * out to wallet risk, wallet anomaly, privacy/mixer risk, budget guardian, and
  * wallet persona, then passes all results through claude-haiku-4-5 to produce
  * an intelligence-style threat brief.
@@ -80,7 +80,7 @@ export const walletThreatBriefAction: Action = {
     }
 
     try {
-      const res = await client.get<VerdictEnvelope>("/api/synthesis/wallet/threat-brief", { address, chain });
+      const res = await client.get<VerdictEnvelope>("/api/wallet/threat_brief", { address, chain });
       const v = res.verdict;
       const lines = [
         `Threat brief for ${address} on ${chain}:`,

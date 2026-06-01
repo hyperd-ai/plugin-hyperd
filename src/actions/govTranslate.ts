@@ -1,7 +1,7 @@
 /**
  * Action: hyperd.gov.translate (synthesis tier)
  *
- * Calls GET /api/synthesis/gov/translate — fetches a governance proposal from
+ * Calls GET /api/gov/translate — fetches a governance proposal from
  * Snapshot or Tally via the governance.summarize endpoint, then passes the
  * result through claude-haiku-4-5 to produce a plain-English voter guide:
  * what the proposal does, who benefits, and a recommended vote stance.
@@ -69,7 +69,7 @@ export const govTranslateAction: Action = {
     }
 
     try {
-      const res = await client.get<VerdictEnvelope>("/api/synthesis/gov/translate", { proposal_url });
+      const res = await client.get<VerdictEnvelope>("/api/gov/translate", { proposal_url });
       const v = res.verdict;
       const lines = [
         `Governance voter guide:`,
