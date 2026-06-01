@@ -1,8 +1,8 @@
 {
   "name": "@hyperd-ai/plugin-hyperd",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "type": "module",
-  "description": "ElizaOS plugin for hyperD — on-demand DeFi intelligence (wallet risk, token security, liquidation alerts, P&L, DEX quotes) paid per-call in USDC on Base via the x402 protocol. No API key, no signup.",
+  "description": "ElizaOS plugin for hyperD — on-demand DeFi intelligence (wallet risk, token security, liquidation alerts, P&L, DEX quotes, synthesis-tier composed verdicts) paid per-call in USDC on Base via the x402 protocol. No API key, no signup.",
   "main": "dist/index.js",
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -78,13 +78,13 @@
         "type": "string",
         "required": true,
         "sensitive": true,
-        "description": "EVM private key (0x-prefixed, 32-byte hex) holding USDC on Base for x402 micropayments. The plugin signs EIP-3009 transfer authorizations with this key. Costs are typically $0.005–$0.20 per call."
+        "description": "EVM private key (0x-prefixed, 32-byte hex) holding USDC on Base for x402 micropayments. The plugin signs EIP-3009 transfer authorizations with this key. Base-tier costs are $0.02–$0.10/call; synthesis-tier costs are $0.30–$1.50/call."
       },
       "HYPERD_MAX_USDC_PER_CALL": {
         "type": "number",
         "required": false,
         "default": 0.25,
-        "description": "Hard cap on USDC payment authorized per call. Refuses calls priced above this. Default $0.25."
+        "description": "Hard cap on USDC payment authorized per call. Refuses calls priced above this. Default $0.25 covers all base-tier actions. Raise to $2.00 to enable synthesis-tier actions (up to $1.50/call)."
       }
     }
   },

@@ -94,3 +94,28 @@ export type HyperdAnyResponse =
   | LiquidationRiskResponse
   | WalletPnlResponse
   | DexQuoteResponse;
+
+// ---------------------------------------------------------------------------
+// Synthesis tier — VerdictEnvelope returned by all 6 composed endpoints.
+// Each endpoint fans out to multiple sub-calls, passes results through
+// claude-haiku-4-5, and returns a structured verdict.
+// ---------------------------------------------------------------------------
+
+export interface VerdictBlock {
+  summary: string;
+  confidence: number;
+  band: string;
+  details?: Record<string, unknown>;
+}
+
+export interface VerdictEnvelope {
+  verdict: VerdictBlock;
+  inputs: Record<string, unknown>;
+  methodology: { version: string; model: string };
+  coverage: {
+    sub_calls_attempted: number;
+    sub_calls_succeeded: number;
+    sub_calls_failed: { id: string; status: number; error?: string }[];
+  };
+  cache: { status: "hit" | "miss" | "bypass" };
+}
